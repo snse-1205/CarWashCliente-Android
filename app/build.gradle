@@ -26,6 +26,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    android {
+        viewBinding {
+            enabled = true
+        }
+    }
 }
 
 dependencies {
@@ -37,4 +42,24 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+
+    implementation 'com.google.android.material:material:1.6.0' // o la versión más recient
+}
+android {
+    compileSdkVersion 33 // Usa la versión adecuada
+    defaultConfig {
+        applicationId "com.example.carwashcliente_android"
+        minSdkVersion 21
+        targetSdkVersion 33
+        // ...
+    }
+    // ...
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    // ...
 }
