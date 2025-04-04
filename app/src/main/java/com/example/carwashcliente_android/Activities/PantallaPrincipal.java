@@ -24,42 +24,39 @@ public class PantallaPrincipal extends AppCompatActivity {
 
         // Configurar Bottom Navigation
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-        // Cargar el fragment inicial (por ejemplo, HomeFragment)
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contenedorFragments, new com.example.carwashcliente_android.Activities.HomeFragment())
-                    .commit();
-        }
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+
+            if (item.getItemId() == R.id.nav_home) {
+                abrirFragment(new HomeFragment());
+            } else if (item.getItemId() == R.id.nav_cotizacion) {
+                abrirFragment(new CotizacionFragment());
+            } else if (item.getItemId() == R.id.nav_historial) {
+                abrirFragment(new HistorialFragment());
+            } else if (item.getItemId() == R.id.nav_vehiculo) {
+                abrirFragment(new VehiculoFragment());
+            }
+            return true;
+        });
     }
 
-    // Listener para la Bottom Navigation
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
-                    int itemId = item.getItemId();
+    private void abrirFragment(Fragment fragment, int action) {
+        Bundle args = new Bundle();
+        args.putInt("ACTION", action);
+        fragment.setArguments(args);
 
-                    if (itemId == R.id.nav_home) {
-                        selectedFragment = new HomeFragment();
-                    } else if (itemId == R.id.nav_cotizacion) {
-                        selectedFragment = new CotizacionFragment();
-                    } else if (itemId == R.id.nav_historial) {
-                        selectedFragment = new HistorialFragment();
-                    } else if (itemId == R.id.nav_vehiculo) {
-                        selectedFragment = new VehiculoFragment();
-                    }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contenedorFragments, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
-                    if (selectedFragment != null) {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.contenedorFragments, selectedFragment)
-                                .commit();
-                    }
+    private void abrirFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contenedorFragments, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
-                    return true;
-                }
 
-            };
-}; // Punto y coma?
+}
