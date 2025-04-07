@@ -2,21 +2,26 @@ package com.example.carwashcliente_android.Activities;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.example.carwashcliente_android.R;
 
-public class RegisterActivity  {
+public class RegisterActivity  extends AppCompatActivity {
 
     private EditText etEmail, etPhone, etPassword, etConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.clone(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        //super.clone(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         etEmail = findViewById(R.id.etEmail);
@@ -42,8 +47,8 @@ public class RegisterActivity  {
         });
     }
 
-    private void startActivity(Intent intent) {
-    }
+   /* private void startActivity(Intent intent) {
+    }*/
 
     private boolean validateRegistration(String email, String phone,
                                          String password, String confirmPassword) {
