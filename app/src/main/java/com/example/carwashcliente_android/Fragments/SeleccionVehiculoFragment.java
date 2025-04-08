@@ -1,4 +1,4 @@
-package com.example.carwashcliente_android;
+package com.example.carwashcliente_android.Fragments;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.carwashcliente_android.R;
 
 
 public class SeleccionVehiculoFragment extends Fragment {

@@ -1,17 +1,18 @@
 package com.example.carwashcliente_android.Activities;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
+import com.example.carwashcliente_android.Fragments.CotizacionFragment;
 
-import com.example.carwashcliente_android.Fragments.FragmenHome;
-
+import com.example.carwashcliente_android.Fragments.HistorialFragment;
+import com.example.carwashcliente_android.Fragments.HomeFragment;
+import com.example.carwashcliente_android.Fragments.VehiculoFragment;
 import com.example.carwashcliente_android.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import android.view.MenuItem;
 
 public class PantallaPrincipal extends AppCompatActivity {
 

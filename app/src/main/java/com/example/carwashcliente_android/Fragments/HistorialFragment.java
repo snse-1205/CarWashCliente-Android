@@ -1,4 +1,4 @@
-package com.example.carwashcliente_android.Activities;
+package com.example.carwashcliente_android.Fragments;
 
 import androidx.fragment.app.Fragment;
 
@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.fragment.app.Fragment;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.carwashcliente_android.Adapters.HistorialAdapter;
 import com.example.carwashcliente_android.Models.Cotizacion;
 import com.example.carwashcliente_android.R;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class HistorialFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private com.example.carwashcliente_android.Activities.HistorialAdapter adapter;
+    private HistorialAdapter adapter;
     private List<Cotizacion> cotizacionesList;
 
     public HistorialFragment() {
@@ -46,7 +47,7 @@ public class HistorialFragment extends Fragment {
         cotizacionesList.add(new Cotizacion("Lavado Completo", "$120.000", "05/06/2023", "Aceptada"));
 
 
-        adapter = new com.example.carwashcliente_android.Activities.HistorialAdapter(cotizacionesList, getContext());
+        adapter = new HistorialAdapter(cotizacionesList, getContext());
         recyclerView.setAdapter(adapter);
 
         return view;

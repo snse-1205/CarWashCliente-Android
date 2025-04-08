@@ -1,4 +1,4 @@
-package com.example.carwashcliente_android.Activities;
+package com.example.carwashcliente_android.Fragments;
 
 import androidx.fragment.app.Fragment;
 
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.carwashcliente_android.Adapters.VehiculoAdapter;
 import com.example.carwashcliente_android.Models.Vehiculo;
 import com.example.carwashcliente_android.R;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class VehiculoFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private com.example.carwashcliente_android.Activities.VehiculoAdapter adapter;
+    private VehiculoAdapter adapter;
     private List<Vehiculo> vehiculosList;
 
     public VehiculoFragment() {
@@ -43,7 +44,7 @@ public class VehiculoFragment extends Fragment {
         vehiculosList.add(new Vehiculo("Honda", "Civic", "XYZ789", "2019"));
 
         // Configurar adapter
-        adapter = new com.example.carwashcliente_android.Activities.VehiculoAdapter(vehiculosList, getContext());
+        adapter = new VehiculoAdapter(vehiculosList, getContext());
         recyclerView.setAdapter(adapter);
 
         return view;

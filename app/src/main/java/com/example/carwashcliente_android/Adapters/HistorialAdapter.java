@@ -1,4 +1,4 @@
-package com.example.carwashcliente_android.Activities;
+package com.example.carwashcliente_android.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
