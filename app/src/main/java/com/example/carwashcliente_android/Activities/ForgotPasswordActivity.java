@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carwashcliente_android.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
@@ -30,19 +29,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 etEmail.setError("Email inválido");
                 return;
             }
-
-            // Enviar email de recuperación (Firebase)
-            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-                    .addOnCompleteListener(task -> {
-                        if(task.isSuccessful()) {
-                            Toast.makeText(this, "Email de recuperación enviado",
-                                    Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-                            Toast.makeText(this, "Error: " + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
         });
     }
 }
