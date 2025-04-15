@@ -1,7 +1,9 @@
 package com.example.carwashcliente_android.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -12,7 +14,10 @@ import com.example.carwashcliente_android.Fragments.HistorialFragment;
 import com.example.carwashcliente_android.Fragments.HomeFragment;
 import com.example.carwashcliente_android.Fragments.VehiculoFragment;
 import com.example.carwashcliente_android.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class PantallaPrincipal extends AppCompatActivity {
 
@@ -58,6 +63,5 @@ public class PantallaPrincipal extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
-
 
 }
