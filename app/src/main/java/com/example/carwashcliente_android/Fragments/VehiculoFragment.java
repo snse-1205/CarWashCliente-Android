@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carwashcliente_android.Adapters.VehiculoAdapter;
-import com.example.carwashcliente_android.Models.Vehiculo;
+import com.example.carwashcliente_android.Models.VehiculoModel;
 import com.example.carwashcliente_android.R;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class VehiculoFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private VehiculoAdapter adapter;
-    private List<Vehiculo> vehiculosList;
+    private List<VehiculoModel> vehiculosList;
 
     public VehiculoFragment() {
         // Required empty public constructor
@@ -40,8 +40,8 @@ public class VehiculoFragment extends Fragment {
         // Inicializar lista de vehículos (esto debería venir de tu backend)
         vehiculosList = new ArrayList<>();
         // Agregar datos de ejemplo
-        vehiculosList.add(new Vehiculo("Toyota", "Corolla", "ABC123", "2020"));
-        vehiculosList.add(new Vehiculo("Honda", "Civic", "XYZ789", "2019"));
+        vehiculosList.add(new VehiculoModel("Toyota", "Corolla", "ABC123", "2020"));
+        vehiculosList.add(new VehiculoModel("Honda", "Civic", "XYZ789", "2019"));
 
         // Configurar adapter
         adapter = new VehiculoAdapter(vehiculosList, getContext());

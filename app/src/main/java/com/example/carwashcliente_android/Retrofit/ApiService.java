@@ -31,7 +31,7 @@ public interface ApiService {
     @POST("cliente")
     Call<Void> registroCliente(
             @PartMap Map<String, RequestBody> campos,
-            @Part MultipartBody.Part archivo // Aquí va el archivo (por ejemplo, imagen)
+            @Part MultipartBody.Part archivo
     );
 
     @Multipart

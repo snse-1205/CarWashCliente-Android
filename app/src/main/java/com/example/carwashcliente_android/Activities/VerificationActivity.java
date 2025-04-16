@@ -191,6 +191,5 @@ public class VerificationActivity extends Activity {
             });
         }
 
-
     }
 }

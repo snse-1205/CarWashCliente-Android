@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtCorreo, txtPassword;
     ClientManager clientManager;
     private final ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-
+    private String tokendispositivo;
     private Button btnLogin, btnRegister, btnForgotPassword;
 
     @Override
@@ -79,8 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                     System.out.println("Fetching FCM registration token failed");
                     return;                }
                 // Get new FCM registration token
-                String token = task.getResult();
-                Log.d("TokenNoti",token);}});
+                tokendispositivo = task.getResult();
+                Log.d("TokenNoti",tokendispositivo);}});
     }
 
     private void verificarLogin() {
@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
             HashMap<String,String> body = new HashMap<>();
             body.put("correo",correo);
             body.put("contrasena",clave);
+            body.put("device",tokendispositivo);
             Call<UsuarioModel> call = apiService.login(body);
             call.enqueue(new Callback<UsuarioModel>() {
                 @Override

@@ -4,7 +4,8 @@ public class UsuarioModel {
     private int id;
     private String username;
     private String token;
-    private int codigo;
+    private Integer codigo;
+    private String mensaje;
 
     public UsuarioModel() {
     }
@@ -15,15 +16,27 @@ public class UsuarioModel {
         this.token = accessToken;
     }
 
-    public UsuarioModel(int codigo) {
+    public UsuarioModel(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public UsuarioModel(Integer codigo) {
         this.codigo = codigo;
     }
 
-    public int getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 

@@ -9,17 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.carwashcliente_android.Models.Vehiculo;
+import com.example.carwashcliente_android.Models.VehiculoModel;
 import com.example.carwashcliente_android.R;
 
 import java.util.List;
 
 public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHolder> {
 
-    private List<Vehiculo> vehiculos;
+    private List<VehiculoModel> vehiculos;
     private Context context;
 
-    public VehiculoAdapter(List<Vehiculo> vehiculos, Context context) {
+    public VehiculoAdapter(List<VehiculoModel> vehiculos, Context context) {
         this.vehiculos = vehiculos;
         this.context = context;
     }
@@ -34,7 +34,7 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Vehiculo vehiculo = vehiculos.get(position);
+        VehiculoModel vehiculo = vehiculos.get(position);
         holder.tvMarca.setText(vehiculo.getMarca());
         holder.tvModelo.setText(vehiculo.getModelo());
         holder.tvPlaca.setText(vehiculo.getPlaca());

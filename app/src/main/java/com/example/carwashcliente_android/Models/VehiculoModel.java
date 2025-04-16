@@ -1,13 +1,13 @@
 package com.example.carwashcliente_android.Models;
 
 
-public class Vehiculo {
+public class VehiculoModel {
     private String marca;
     private String modelo;
     private String placa;
     private String anio;
 
-    public Vehiculo(String marca, String modelo, String placa, String anio) {
+    public VehiculoModel(String marca, String modelo, String placa, String anio) {
         this.marca = marca;
         this.modelo = modelo;
         this.placa = placa;
