@@ -3,6 +3,7 @@ package com.example.carwashcliente_android.Fragments;
 import androidx.fragment.app.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.carwashcliente_android.Activities.LoginActivity;
+import com.example.carwashcliente_android.Activities.RegisterActivity;
+import com.example.carwashcliente_android.Activities.RegistroVehiculo;
 import com.example.carwashcliente_android.Adapters.UbicacionAdapter;
 import com.example.carwashcliente_android.Adapters.VehiculoAdapter;
 import com.example.carwashcliente_android.Config.ClientManager;
@@ -21,6 +25,7 @@ import com.example.carwashcliente_android.Models.VehiculoModel;
 import com.example.carwashcliente_android.R;
 import com.example.carwashcliente_android.Retrofit.ApiService;
 import com.example.carwashcliente_android.Retrofit.RetrofitClient;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONObject;
 
@@ -38,6 +43,7 @@ public class VehiculoFragment extends Fragment {
     private List<VehiculoModel> vehiculosList;
     private final ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
     private ClientManager clientManager;
+    private FloatingActionButton fabAgregarVehiculo;
 
     public VehiculoFragment() {
         // Required empty public constructor
@@ -47,6 +53,12 @@ public class VehiculoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_vehiculo, container, false);
+        fabAgregarVehiculo = view.findViewById(R.id.fab_agregar_vehiculo);
+
+        fabAgregarVehiculo.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), RegistroVehiculo.class);
+            startActivity(intent);
+        });
 
         clientManager = new ClientManager(getContext());
 
