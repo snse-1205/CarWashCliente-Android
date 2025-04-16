@@ -35,13 +35,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Galería"
-                    android:layout_marginBottom="8dp" />
+                    android:layout_marginBottom="8dp"
+                    android:textColor="?attr/colorOnBackground"/>
 
                 <Button
                     android:id="@+id/btnTomarFoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tomar Foto" />
+                    android:text="Tomar Foto"
+                    android:textColor="?attr/colorOnBackground"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -50,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="?android:attr/textColorPrimary"/>
 
         <LinearLayout
             android:layout_width="match_parent"

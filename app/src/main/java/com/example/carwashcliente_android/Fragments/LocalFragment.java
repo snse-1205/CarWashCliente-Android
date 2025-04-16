@@ -9,11 +9,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.carwashcliente_android.Models.Cotizacion;
 import com.example.carwashcliente_android.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,7 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class LocalFragment extends Fragment {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
-
+    Cotizacion cotizacion;
     private MapView mapView;
     private GoogleMap googleMap;
 
@@ -36,7 +38,13 @@ public class LocalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_local, container, false);
+        if (getArguments() != null) {
+            cotizacion = (Cotizacion) getArguments().getSerializable("cotizacion");
+            if (cotizacion != null) {
 
+                Log.d("Cotizacion modalidad",cotizacion.getModalidad()+"");
+            }
+        }
         mapView = view.findViewById(R.id.mapView);
         Button btnContinuar = view.findViewById(R.id.btnContinuarLocal);
         Button btnCancelar = view.findViewById(R.id.btnCancelarLocal);
@@ -52,9 +60,13 @@ public class LocalFragment extends Fragment {
         });
 
         btnContinuar.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("cotizacion", cotizacion);
+            Fragment fragment = new SeleccionVehiculoFragment();
+            fragment.setArguments(bundle);
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorFragments, new SeleccionVehiculoFragment())
+                    .replace(R.id.contenedorFragments, fragment)
                     .addToBackStack(null)
                     .commit();
         });

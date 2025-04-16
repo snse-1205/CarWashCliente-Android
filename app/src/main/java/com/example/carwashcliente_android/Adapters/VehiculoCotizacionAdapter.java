@@ -2,6 +2,7 @@ package com.example.carwashcliente_android.Adapters;
 
 import androidx.fragment.app.Fragment;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,20 +12,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.carwashcliente_android.Fragments.LocalFragment;
 import com.example.carwashcliente_android.Fragments.SeleccionServiciosFragment;
+import com.example.carwashcliente_android.Models.Cotizacion;
 import com.example.carwashcliente_android.Models.VehiculoModel;
 import com.example.carwashcliente_android.R;
 
 import java.util.List;
 
 public class VehiculoCotizacionAdapter extends RecyclerView.Adapter<VehiculoCotizacionAdapter.ViewHolder> {
-
+    private VehiculoClickListener listener;
     private List<VehiculoModel> vehiculos;
-    private Fragment fragment;
+    Cotizacion cotizacion;
 
-    public VehiculoCotizacionAdapter(List<VehiculoModel> vehiculos, Fragment fragment) {
+    public VehiculoCotizacionAdapter(List<VehiculoModel> vehiculos, VehiculoClickListener listener) {
         this.vehiculos = vehiculos;
-        this.fragment = fragment;
+        this.listener = listener;
     }
 
     @NonNull
@@ -44,15 +47,9 @@ public class VehiculoCotizacionAdapter extends RecyclerView.Adapter<VehiculoCoti
         holder.tvAnio.setText(vehiculo.getAnio());
 
         holder.itemView.setOnClickListener(v -> {
-            SeleccionServiciosFragment fragmentDestino = SeleccionServiciosFragment.newInstance(
-                    vehiculo.getId()
-            );
-            Log.d("ID por adapter: ", "Vehiculo id: "+vehiculo.getId());
-            fragment.requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.contenedorFragments, fragmentDestino)
-                    .addToBackStack(null)
-                    .commit();
+            if (listener != null) {
+                listener.onVehiculoSeleccionado(vehiculo);
+            }
         });
     }
 
@@ -72,4 +69,9 @@ public class VehiculoCotizacionAdapter extends RecyclerView.Adapter<VehiculoCoti
             tvAnio = itemView.findViewById(R.id.tvAnio);
         }
     }
+
+    public interface VehiculoClickListener {
+        void onVehiculoSeleccionado(VehiculoModel vehiculo);
+    }
+
 }

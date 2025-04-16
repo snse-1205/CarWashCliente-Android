@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.carwashcliente_android.Models.Cotizacion;
 import com.example.carwashcliente_android.R;
 
 
@@ -17,24 +18,20 @@ public class SeleccionServiciosFragment extends Fragment {
     public SeleccionServiciosFragment() {
         // Required empty public constructor
     }
-
-    private int idvehiculo;
-    int marca;
-    public static SeleccionServiciosFragment newInstance(int idvehiculo) {
-        SeleccionServiciosFragment fragment = new SeleccionServiciosFragment();
-        Bundle args = new Bundle();
-        args.putInt("idvehiculo", idvehiculo);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    Cotizacion cotizacion;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_seleccion_servicios, container, false);
         if (getArguments() != null) {
-            marca = getArguments().getInt("idvehiculo");
+            cotizacion = (Cotizacion) getArguments().getSerializable("cotizacion");
+            if (cotizacion != null) {
+
+                Log.d("Cotizacion modalidad",cotizacion.getModalidad()+"");
+            }
         }
 
-        Log.d("ID: ", "Vehiculo id: "+marca);
-        return inflater.inflate(R.layout.fragment_seleccion_servicios, container, false);
+        Log.d("ID: ", "Vehiculo id: "+cotizacion.getIdCarro()+"");
+        return view;
     }
 
 }

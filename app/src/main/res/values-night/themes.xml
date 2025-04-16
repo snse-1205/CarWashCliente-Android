@@ -3,6 +3,14 @@
     <style name="Base.Theme.CarWashClienteAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondaryDark</item>
+        <item name="android:colorBackground">@color/colorBackgroundDark</item>
+        <item name="android:textColorPrimary">@color/colorOnBackgroundDark</item>
+        <item name="colorSurface">@color/colorSurfaceDark</item>
+        <item name="colorOnSurface">@color/colorOnSurfaceDark</item>
+        <item name="android:textColorSecondary">@color/colorOnSurfaceDark</item>
+        <item name="colorError">@color/colorErrorDark</item>
     </style>
 
     <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight">

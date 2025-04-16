@@ -2,4 +2,42 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="rosa_pastel">#FAD0C9</color>
+    <color name="azul_pastel">#A8D8FF</color>
+    <color name="verde_pastel">#B2F0B9</color>
+    <color name="lavanda_pastel">#E3D1F4</color>
+    <color name="amarillo_pastel">#FFF3B0</color>
+    <color name="menta_pastel">#B2F7EF</color>
+    <color name="durazno_pastel">#FFB3AB</color>
+    <color name="melocoton_pastel">#FFDAC1</color>
+    <color name="salmon_pastel">#FFB6A6</color>
+    <color name="peach_pastel">#FFD2A6</color>
+    <color name="lila_pastel">#D4A7F0</color>
+    <color name="morado_pastel">#C6A9F7</color>
+    <color name="azul_pastel_claro">#B0E0E6</color>
+    <color name="gris_pastel">#D3D3D3</color>
+    <color name="melon_pastel">#FFCC99</color>
+    <color name="crema_pastel">#FFF5B7</color>
+    <color name="amarillo_manteca">#F7E396</color>
+    <color name="menta_claro">#A1F4C1</color>
+    <color name="rosa_dulce">#FFDAE8</color>
+
+    <!--Colores para el tema claro -->
+    <color name="colorPrimaryLight">#4c979e</color> <!-- Color principal -->
+    <color name="colorSecondaryLight">#757575</color> <!-- Color secundario -->
+    <color name="colorBackgroundLight">#308290</color> <!-- Fondo claro -->
+    <color name="colorOnBackgroundLight">#000000</color> <!-- Texto en el fondo claro -->
+    <color name="colorSurfaceLight">#FCF8F2</color> <!-- Superficie clara -->
+    <color name="colorOnSurfaceLight">#000000</color> <!-- Texto en superficie -->
+    <color name="colorErrorLight">#B00020</color> <!-- Color de error -->
+
+    <!-- Colores para el tema oscuro -->
+    <color name="colorPrimaryDark">#2a2c2f</color> <!-- Color principal (oscuro) -->
+    <color name="colorSecondaryDark">#D3D3D3</color> <!-- Color secundario (oscuro) -->
+    <color name="colorBackgroundDark">#1e1f22</color> <!-- Fondo oscuro -->
+    <color name="colorOnBackgroundDark">#c4c5cb</color> <!-- Texto en fondo oscuro -->
+    <color name="colorSurfaceDark">#2a2c2f</color> <!-- Superficie oscura -->
+    <color name="colorOnSurfaceDark">#c4c5cb</color> <!-- Texto en superficie oscura -->
+    <color name="colorErrorDark">#CF6679</color> <!-- Color de error (oscuro) -->
 </resources>
