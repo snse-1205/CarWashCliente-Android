@@ -69,17 +69,18 @@ public interface ApiService {
     Call<List<VehiculoModel>> listaVehiculo(@Header("Authorization") String token);
 
     @POST("carros")
-    Call<Void> agregarVehiculo(@Header("Authorization") String token, HashMap<String,String> body);
+    Call<Void> agregarVehiculo(@Header("Authorization") String token,
+                               @Body HashMap<String,String> body);
 
     @GET("carros/mym")
     Call<List<VehiculoModel.Marca>> listarMarcaModelo();
 
     @GET("servicios/")
     Call<List<ServiciosModel>> listarServicios(@Header("Authorization") String token);
-    @PUT("carros/{id}")
+
+    @PUT("carros/")
     Call<VehiculoModel> actualizarCarro(@Header("Authorization") String token,
-                                        HashMap<String,String> body,
-                                        @Path("id") int id);
+                                        @Body HashMap<String,String> body);
 
     @PUT("carros/eliminar/{id}")
     Call<Void> eliminarCarros(@Header("Authorization") String token,
@@ -102,14 +103,15 @@ public interface ApiService {
     Call<Void> eliminarCliente(@Header("Authorization") String token);
 
     @PUT("cliente/ubicacion/{id}")
-    Call<UbicacionModel> eliminarUbicacion(@Header("Authorization") String token, @Path("id") int id);
+    Call<UbicacionModel> eliminarUbicacion(@Header("Authorization") String token,
+                                           @Path("id") int id);
 
     @GET("cotizaciones/pendientes")
     Call<List<Cotizacion>> aceptarORechazarCotizacion(@Header("Authorization") String token);
 
     @PUT("cotizaciones/pendientes/{id}")
     Call<List<Cotizacion>> accionEnCotizacion(@Header("Authorization") String token,
-                                              HashMap<String,String> body,
+                                              @Body HashMap<String,String> body,
                                               @Path("id") int id);
 
     @GET("cotizaciones/historial")
