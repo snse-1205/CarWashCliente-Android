@@ -35,7 +35,6 @@ public class SeleccionVehiculoFragment extends Fragment {
                     .commit();
         });
 
-
         return view;
     }
 

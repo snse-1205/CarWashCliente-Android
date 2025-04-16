@@ -1,5 +1,6 @@
 package com.example.carwashcliente_android.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.carwashcliente_android.Activities.RegistroUbicacion;
 import com.example.carwashcliente_android.R;
 
 
@@ -26,11 +28,8 @@ public class DomicilioFragment extends Fragment {
         Button btnCancelar = view.findViewById(R.id.btnCancelarDomicilio);
 
         btnAgregar.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.contenedorFragments, new SeleccionVehiculoFragment())
-                    .addToBackStack(null)
-                    .commit();
+            Intent intent = new Intent(getContext(), RegistroUbicacion.class);
+            startActivity(intent);
         });
 
         btnCancelar.setOnClickListener(v ->

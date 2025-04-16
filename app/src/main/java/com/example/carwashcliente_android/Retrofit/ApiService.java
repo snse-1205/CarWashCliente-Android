@@ -43,4 +43,15 @@ public interface ApiService {
     @POST("cliente/verificar")
     Call<UsuarioModel> verificar(@Body HashMap<String, String> body);
 
+    @POST("cliente/ubicacion/")
+    Call<Void> registroUbicacion(
+            @Header("Authorization") String token,
+            @Body HashMap<String, String> body
+    );
+
+    @GET("cliente/ubicacion/")
+    Call<Void> listaUbicaciones(
+            @Header("Authorization") String token
+    );
+
 }
