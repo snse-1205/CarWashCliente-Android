@@ -8,43 +8,50 @@ public class Cotizacion implements Serializable {
     private int idCarro;
     private String servicio;
     private int modalidad;
-    private double precio;
+    private double total;  // Cambié 'precio' por 'total'
     private String fechaCita;
     private String estado;
     private int ubicacion;
-    private List<Cotizacion.detalles>detalles = new ArrayList<>();
+    private List<Cotizacion.detalles> detalles = new ArrayList<>();
 
     public Cotizacion() {
     }
 
-
-    public Cotizacion(int idCarro, String servicio, int modalidad, double precio, String fechaCita, String estado, int ubicacion) {
+    public Cotizacion(int idCarro, String servicio, int modalidad, double total, String fechaCita, String estado, int ubicacion) {
         this.idCarro = idCarro;
         this.servicio = servicio;
         this.modalidad = modalidad;
-        this.precio = precio;
+        this.total = total;
         this.fechaCita = fechaCita;
         this.estado = estado;
         this.ubicacion = ubicacion;
     }
 
-    public Cotizacion(int idCarro, String servicio, int modalidad, double precio, String fechaCita, String estado) {
+    public Cotizacion(int idCarro, String servicio, int modalidad, double total, String fechaCita, String estado) {
         this.idCarro = idCarro;
         this.servicio = servicio;
         this.modalidad = modalidad;
-        this.precio = precio;
+        this.total = total;
         this.fechaCita = fechaCita;
         this.estado = estado;
     }
 
-    public Cotizacion(String servicio, int modalidad, int idCarro, double precio, String fecha, String estado, List<Cotizacion.detalles> detalles) {
+    public Cotizacion(String servicio, int modalidad, int idCarro, double total, String fecha, String estado, List<Cotizacion.detalles> detalles) {
         this.servicio = servicio;
         this.modalidad = modalidad;
-        this.precio = precio;
+        this.total = total;
         this.fechaCita = fecha;
         this.estado = estado;
         this.detalles = detalles;
         this.idCarro = idCarro;
+    }
+
+    public void calcularTotal() {
+        double sumaTotal = 0.0;
+        for (detalles detalle : detalles) {
+            sumaTotal += detalle.getPrecio();  // Suma los precios de los detalles
+        }
+        this.total = sumaTotal;  // Actualiza el total con la suma
     }
 
     public int getModalidad() {
@@ -63,12 +70,12 @@ public class Cotizacion implements Serializable {
         this.servicio = servicio;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getTotal() {  // Renombrado a 'getTotal'
+        return total;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setTotal(double total) {  // Renombrado a 'setTotal'
+        this.total = total;
     }
 
     public String getFechaCita() {
@@ -158,7 +165,7 @@ public class Cotizacion implements Serializable {
         sb.append("  idCarro: ").append(idCarro).append("\n");
         sb.append("  servicio: ").append(servicio).append("\n");
         sb.append("  modalidad: ").append(modalidad).append("\n");
-        sb.append("  precio: ").append(precio).append("\n");
+        sb.append("  total: ").append(total).append("\n");
         sb.append("  fechaCita: ").append(fechaCita).append("\n");
         sb.append("  estado: ").append(estado).append("\n");
 
@@ -172,5 +179,4 @@ public class Cotizacion implements Serializable {
         sb.append("}");
         return sb.toString();
     }
-
 }

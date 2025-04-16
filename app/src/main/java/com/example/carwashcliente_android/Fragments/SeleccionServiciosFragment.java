@@ -65,7 +65,18 @@ public class SeleccionServiciosFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         llenarLista();
         btnContinuar.setOnClickListener(v -> {
-            Log.d("Cotizacion",cotizacion.toString());
+            cotizacion.calcularTotal();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("cotizacion", cotizacion);
+
+            Fragment fragment = new ResumenServiciosFragment();
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contenedorFragments, fragment)
+                    .addToBackStack(null)
+                    .commit();
+
         });
 
         Log.d("ID: ", "Vehiculo id: "+cotizacion.getIdCarro()+"");

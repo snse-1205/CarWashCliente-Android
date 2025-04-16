@@ -117,4 +117,10 @@ public interface ApiService {
     @GET("cotizaciones/historial")
     Call<List<Cotizacion>> cotizacionesPasadas(@Header("Authorization") String token);
 
+    @POST("cotizaciones/")
+    Call <Void> crearCotizacion(
+            @Header("Authorization") String token,
+            @Body Cotizacion cotizacion
+    );
+
 }
