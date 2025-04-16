@@ -52,7 +52,7 @@
                         android:layout_marginEnd="8dp"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="2dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
                     <TextView
                         android:id="@+id/tvModelo"
@@ -61,7 +61,7 @@
                         android:layout_marginEnd="8dp"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="2dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <TextView
