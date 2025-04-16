@@ -12,6 +12,7 @@ import com.example.carwashcliente_android.Fragments.CotizacionFragment;
 
 import com.example.carwashcliente_android.Fragments.HistorialFragment;
 import com.example.carwashcliente_android.Fragments.HomeFragment;
+import com.example.carwashcliente_android.Fragments.SeleccionLugarFragment;
 import com.example.carwashcliente_android.Fragments.VehiculoFragment;
 import com.example.carwashcliente_android.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +37,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_home) {
                 abrirFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.nav_cotizacion) {
-                abrirFragment(new CotizacionFragment());
+                abrirFragment(new SeleccionLugarFragment());
             } else if (item.getItemId() == R.id.nav_historial) {
                 abrirFragment(new HistorialFragment());
             } else if (item.getItemId() == R.id.nav_vehiculo) {
