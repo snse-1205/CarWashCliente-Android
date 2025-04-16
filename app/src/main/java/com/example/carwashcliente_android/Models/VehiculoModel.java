@@ -9,6 +9,7 @@ public class VehiculoModel {
     private String modelo;
     private String placa;
     private String anio;
+    private String color;
 
     public VehiculoModel(int id, String marca, String modelo, String placa, String anio) {
         this.id = id;
@@ -16,6 +17,23 @@ public class VehiculoModel {
         this.modelo = modelo;
         this.placa = placa;
         this.anio = anio;
+    }
+
+    public VehiculoModel(int id, String marca, String modelo, String placa, String anio, String color) {
+        this.id = id;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.placa = placa;
+        this.anio = anio;
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public VehiculoModel() {}

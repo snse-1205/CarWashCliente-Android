@@ -67,11 +67,6 @@ public class VehiculoFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerVehiculos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Inicializa la lista y el adapter vacío
-        vehiculosList = new ArrayList<>();
-        adapter = new VehiculoAdapter(vehiculosList, getContext());
-        recyclerView.setAdapter(adapter);
-
         cargarVehiculos();
 
         return view;
@@ -87,9 +82,13 @@ public class VehiculoFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     vehiculosList.clear();
                     vehiculosList.addAll(response.body());
-                    VehiculoModel ubi = vehiculosList.get(0);
 
-                    adapter = new VehiculoAdapter(vehiculosList, getContext());
+                    adapter = new VehiculoAdapter(vehiculosList, vehiculos->{
+                        Actualizar(vehiculos);
+                    }, vehiculos2->{
+                        Eliminar(vehiculos2);
+                    });
+
                     recyclerView.setAdapter(adapter);
                     Log.d("Retrofit", "Vehiculos mostrados");
                 } else {
@@ -112,5 +111,48 @@ public class VehiculoFragment extends Fragment {
                 Log.e("Retrofit", "Fallo en la solicitud: " + t.getMessage());
             }
         });
+    }
+
+    private void Eliminar(VehiculoModel vehiculo){
+        int id = vehiculo.getId();
+        String token= "Bearer " + clientManager.getClientToken();
+        Call<Void> call = apiService.eliminarCarros(token,id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.d("Retrofit", "Vehiculo Eliminado");
+                } else {
+                    try {
+                        String errorBody = response.errorBody().string();
+
+                        JSONObject jsonObject = new JSONObject(errorBody);
+                        String mensaje = jsonObject.getString("mensaje");
+
+                        Toast.makeText(getContext(), "⚠️ " + mensaje, Toast.LENGTH_LONG).show();
+                        Log.e("Retrofit", "Mensaje recibido: " + mensaje);
+                    } catch (Exception e) {
+                        Log.e("Retrofit", "Error al parsear errorBody: " + e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("Retrofit", "Fallo en la solicitud: " + t.getMessage());
+            }
+        });
+    }
+
+    private void Actualizar(VehiculoModel vehiculo){
+        Intent intent = new Intent(getContext(), RegistroVehiculo.class);
+        intent.putExtra("accion", 2);
+        intent.putExtra("id", vehiculo.getId());
+        intent.putExtra("nombreMarca", vehiculo.getMarca());
+        intent.putExtra("nombreModelo", vehiculo.getModelo());
+        intent.putExtra("placa", vehiculo.getPlaca());
+        intent.putExtra("anio", vehiculo.getAnio());
+        intent.putExtra("color", vehiculo.getColor());
+        startActivity(intent);
     }
 }

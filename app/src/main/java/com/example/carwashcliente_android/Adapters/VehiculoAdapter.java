@@ -1,14 +1,18 @@
 package com.example.carwashcliente_android.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.carwashcliente_android.Activities.RegistroVehiculo;
+import com.example.carwashcliente_android.Models.ServiciosModel;
 import com.example.carwashcliente_android.Models.VehiculoModel;
 import com.example.carwashcliente_android.R;
 
@@ -17,11 +21,13 @@ import java.util.List;
 public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHolder> {
 
     private List<VehiculoModel> vehiculos;
-    private Context context;
+    private VehiculoAdapter.ServicioClickListener listener;
+    private VehiculoAdapter.ServicioClickListener2 listener2;
 
-    public VehiculoAdapter(List<VehiculoModel> vehiculos, Context context) {
+    public VehiculoAdapter(List<VehiculoModel> vehiculos, ServicioClickListener listener, ServicioClickListener2 listener2) {
         this.vehiculos = vehiculos;
-        this.context = context;
+        this.listener = listener;
+        this.listener2 =listener2;
     }
 
     @NonNull
@@ -39,6 +45,24 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHo
         holder.tvModelo.setText(vehiculo.getModelo());
         holder.tvPlaca.setText(vehiculo.getPlaca());
         holder.tvAnio.setText(vehiculo.getAnio());
+        holder.tvColor.setText(vehiculo.getMarca());
+
+        holder.btnEditar.setOnClickListener(
+                v -> {
+                    if(listener != null){
+                        listener.onServicioSeleccionado(vehiculo);
+                    }
+                }
+        );
+
+        holder.btnEliminar.setOnClickListener(
+                v -> {
+                    if(listener2 != null){
+                        listener2.onServicioSeleccionado(vehiculo);
+                    }
+                }
+        );
+
     }
 
     @Override
@@ -47,7 +71,8 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvMarca, tvModelo, tvPlaca, tvAnio;
+        public TextView tvMarca, tvModelo, tvPlaca, tvAnio, tvColor;
+        public Button btnEditar, btnEliminar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -55,6 +80,17 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHo
             tvModelo = itemView.findViewById(R.id.tvModelo);
             tvPlaca = itemView.findViewById(R.id.tvPlaca);
             tvAnio = itemView.findViewById(R.id.tvAnio);
+            tvColor = itemView.findViewById(R.id.tvColor);
+            btnEditar = itemView.findViewById(R.id.btnEditar);
+            btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
+
+    public interface ServicioClickListener {
+        void onServicioSeleccionado(VehiculoModel servicio);
+    };
+
+    public interface ServicioClickListener2 {
+        void onServicioSeleccionado(VehiculoModel servicio);
+    };
 }

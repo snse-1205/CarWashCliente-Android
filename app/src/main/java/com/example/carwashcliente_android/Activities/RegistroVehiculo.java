@@ -49,9 +49,9 @@ public class RegistroVehiculo extends AppCompatActivity {
     private EditText etPlaca,etAnio,etColor;
     private Spinner spinnerMarcas, spinnerModelos;
     private Button btnGuardarVehiculo;
-    private int accion=0, id;
+    private static int accion=0, id;
     private List<VehiculoModel.Modelo> listaModelos = new ArrayList<>();
-    private String nombreMarcaRecibida = "", placa="",anio="";
+    private String nombreMarcaRecibida = "", placa="",anio="", color="";
     private String nombreModeloRecibido = "";
 
     @Override
@@ -79,7 +79,9 @@ public class RegistroVehiculo extends AppCompatActivity {
                 nombreModeloRecibido = intent.getStringExtra("nombreModelo");
                 placa = intent.getStringExtra("placa");
                 anio = intent.getStringExtra("anio");
-                llenarCamposParaModificar(nombreMarcaRecibida,nombreModeloRecibido);
+                color = intent.getStringExtra("color");
+                llenarCamposParaModificar(nombreMarcaRecibida,nombreModeloRecibido,placa,anio, color);
+                btnGuardarVehiculo.setText("Actualizar");
             }
 
         } else {
@@ -93,7 +95,11 @@ public class RegistroVehiculo extends AppCompatActivity {
             String color = etColor.getText().toString();
             String anio = etAnio.getText().toString();
             if (validateRegistration(placa, color, anio)) {
-                crearVehiculo();
+                if (accion == 2) {
+                    actualizarVehiculo();
+                } else {
+                    crearVehiculo();
+                }
             }
         });
 
@@ -104,11 +110,12 @@ public class RegistroVehiculo extends AppCompatActivity {
         });
     }
 
-    private void llenarCamposParaModificar(){
-        etPlaca.setText(contenido.getUsername());
-        etColor.setText(contenido.getUsername());
-        etAnio.setText(contenido.getUsername());
+    private void llenarCamposParaModificar(String marca, String modelo, String placa, String anio, String color){
+        etPlaca.setText(placa);  // ← Corregido
+        etColor.setText(color);
+        etAnio.setText(anio);
     }
+
 
     private void actualizarVehiculo(){
         String token = "Bearer " + clientManager.getClientToken();
@@ -128,26 +135,22 @@ public class RegistroVehiculo extends AppCompatActivity {
         }
 
         HashMap<String, String> body = new HashMap<>();
+        body.put("id",idContacto+"");
         body.put("placa", etPlaca.getText().toString());
         body.put("color", etColor.getText().toString());
         body.put("modelo", idModelo);
         body.put("year", etAnio.getText().toString());
 
-        Call<VehiculoModel> call = apiService.actualizarCarro(token, body, idContacto);
+        Call<VehiculoModel> call = apiService.actualizarCarro(token, body);
         call.enqueue(new Callback<VehiculoModel>() {
             @Override
             public void onResponse(Call<VehiculoModel> call, Response<VehiculoModel> response) {
                 if (response.isSuccessful()) {
                     Log.d("Retrofit", "Vehiculo agregado correctamente");
                 } else {
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject jsonObject = new JSONObject(errorBody);
-                        String mensaje = jsonObject.getString("mensaje");
-                        Log.e("Retrofit", "Mensaje recibido: " + mensaje);
-                    } catch (Exception e) {
-                        Log.e("Retrofit", "Error al parsear errorBody: " + e.getMessage());
-                    }
+                    String errorBody = response.errorBody().toString();
+                    Log.e("Retrofit", "Respuesta de error NO JSON: " + errorBody);
+                    Toast.makeText(getApplicationContext(), "⚠️ Error inesperado del servidor", Toast.LENGTH_LONG).show();
                 }
             }
 
