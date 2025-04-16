@@ -51,7 +51,8 @@ public class RegistroVehiculo extends AppCompatActivity {
     private Button btnGuardarVehiculo;
     private int accion=0, id;
     private List<VehiculoModel.Modelo> listaModelos = new ArrayList<>();
-
+    private String nombreMarcaRecibida = "", placa="",anio="";
+    private String nombreModeloRecibido = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +74,14 @@ public class RegistroVehiculo extends AppCompatActivity {
             accion = intent.getIntExtra("accion",0);
             if(accion==2){
                 Log.e("Pantalla Actualizar", "Estamos en Actualizar");
-                llenarParaModificar();
+                id = intent.getIntExtra("id",-1);
+                nombreMarcaRecibida = intent.getStringExtra("nombreMarca");
+                nombreModeloRecibido = intent.getStringExtra("nombreModelo");
+                placa = intent.getStringExtra("placa");
+                anio = intent.getStringExtra("anio");
+                llenarCamposParaModificar(nombreMarcaRecibida,nombreModeloRecibido);
             }
-            id = intent.getIntExtra("id",-1);
+
         } else {
             Log.e("Pantalla Actualizar", "No se recibio el entero");
         }
@@ -241,15 +247,27 @@ public class RegistroVehiculo extends AppCompatActivity {
 
     private void cargarSpinnerMarcas(List<VehiculoModel.Marca> marcas) {
         List<String> nombresMarcas = new ArrayList<>();
-        for (VehiculoModel.Marca marca : marcas) {
+        int indiceMarcaSeleccionada = -1;
+
+        for (int i = 0; i < marcas.size(); i++) {
+            VehiculoModel.Marca marca = marcas.get(i);
             nombresMarcas.add(marca.getNombre());
+
+            // Buscar la marca que coincide con el nombre recibido
+            if (marca.getNombre().equalsIgnoreCase(nombreMarcaRecibida)) {
+                indiceMarcaSeleccionada = i;
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresMarcas);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMarcas.setAdapter(adapter);
 
-        // Al seleccionar una marca, cargar modelos
+        if (indiceMarcaSeleccionada != -1) {
+            spinnerMarcas.setSelection(indiceMarcaSeleccionada);
+            cargarSpinnerModelos(marcas.get(indiceMarcaSeleccionada).getModelos());
+        }
+
         spinnerMarcas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -262,17 +280,31 @@ public class RegistroVehiculo extends AppCompatActivity {
         });
     }
 
+
     private void cargarSpinnerModelos(List<VehiculoModel.Modelo> modelos) {
-        listaModelos = modelos; // 👈 Guardamos la lista globalmente
+        listaModelos = modelos;
 
         List<String> nombresModelos = new ArrayList<>();
-        for (VehiculoModel.Modelo modelo : modelos) {
+        int indiceModeloSeleccionado = -1;
+
+        for (int i = 0; i < modelos.size(); i++) {
+            VehiculoModel.Modelo modelo = modelos.get(i);
             nombresModelos.add(modelo.getNombre());
+
+            // Buscar el modelo que coincide con el nombre recibido
+            if (modelo.getNombre().equalsIgnoreCase(nombreModeloRecibido)) {
+                indiceModeloSeleccionado = i;
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresModelos);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerModelos.setAdapter(adapter);
+
+        if (indiceModeloSeleccionado != -1) {
+            spinnerModelos.setSelection(indiceModeloSeleccionado);
+        }
     }
+
 
 }
