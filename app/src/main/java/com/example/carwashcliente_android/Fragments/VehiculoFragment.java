@@ -57,6 +57,7 @@ public class VehiculoFragment extends Fragment {
 
         fabAgregarVehiculo.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), RegistroVehiculo.class);
+            intent.putExtra("accion", 1);
             startActivity(intent);
         });
 

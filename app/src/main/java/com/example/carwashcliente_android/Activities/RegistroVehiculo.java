@@ -1,5 +1,10 @@
 package com.example.carwashcliente_android.Activities;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -18,6 +23,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.carwashcliente_android.Config.ClientManager;
+import com.example.carwashcliente_android.Models.UsuarioModel;
 import com.example.carwashcliente_android.Models.VehiculoModel;
 import com.example.carwashcliente_android.R;
 import com.example.carwashcliente_android.Retrofit.ApiService;
@@ -25,10 +31,14 @@ import com.example.carwashcliente_android.Retrofit.RetrofitClient;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,6 +49,9 @@ public class RegistroVehiculo extends AppCompatActivity {
     private EditText etPlaca,etAnio,etColor;
     private Spinner spinnerMarcas, spinnerModelos;
     private Button btnGuardarVehiculo;
+    private int accion=0, id;
+    private List<VehiculoModel.Modelo> listaModelos = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +68,18 @@ public class RegistroVehiculo extends AppCompatActivity {
 
         btnGuardarVehiculo=findViewById(R.id.btnGuardarVehiculo);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("accion") && intent.hasExtra("id")) {
+            accion = intent.getIntExtra("accion",0);
+            if(accion==2){
+                Log.e("Pantalla Actualizar", "Estamos en Actualizar");
+                llenarParaModificar();
+            }
+            id = intent.getIntExtra("id",-1);
+        } else {
+            Log.e("Pantalla Actualizar", "No se recibio el entero");
+        }
+
         llamarMarcas();
 
         btnGuardarVehiculo.setOnClickListener(v -> {
@@ -70,6 +95,60 @@ public class RegistroVehiculo extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+    }
+
+    private void llenarCamposParaModificar(){
+        etPlaca.setText(contenido.getUsername());
+        etColor.setText(contenido.getUsername());
+        etAnio.setText(contenido.getUsername());
+    }
+
+    private void actualizarVehiculo(){
+        String token = "Bearer " + clientManager.getClientToken();
+
+        int idContacto = id;
+        Log.e("Retrofit", "Id: "+idContacto);
+        if(idContacto==-1){
+            Log.e("Intent Update", "No se obtuvo el valor");
+            return;
+        }
+
+        int modeloSeleccionado = spinnerModelos.getSelectedItemPosition();
+        String idModelo = "";
+
+        if (modeloSeleccionado >= 0 && modeloSeleccionado < listaModelos.size()) {
+            idModelo = String.valueOf(listaModelos.get(modeloSeleccionado).getId()); // 👈 Aquí tienes el ID real
+        }
+
+        HashMap<String, String> body = new HashMap<>();
+        body.put("placa", etPlaca.getText().toString());
+        body.put("color", etColor.getText().toString());
+        body.put("modelo", idModelo);
+        body.put("year", etAnio.getText().toString());
+
+        Call<VehiculoModel> call = apiService.actualizarCarro(token, body, idContacto);
+        call.enqueue(new Callback<VehiculoModel>() {
+            @Override
+            public void onResponse(Call<VehiculoModel> call, Response<VehiculoModel> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Retrofit", "Vehiculo agregado correctamente");
+                } else {
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject jsonObject = new JSONObject(errorBody);
+                        String mensaje = jsonObject.getString("mensaje");
+                        Log.e("Retrofit", "Mensaje recibido: " + mensaje);
+                    } catch (Exception e) {
+                        Log.e("Retrofit", "Error al parsear errorBody: " + e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VehiculoModel> call, Throwable t) {
+                Log.e("Retrofit", "Falla en la solicitud: " + t.getMessage());
+            }
         });
     }
 
@@ -103,14 +182,23 @@ public class RegistroVehiculo extends AppCompatActivity {
         });
     }
 
-    private void crearVehiculo(){
-        String token= "Bearer " + clientManager.getClientToken();
+    private void crearVehiculo() {
+        String token = "Bearer " + clientManager.getClientToken();
+
+        int modeloSeleccionado = spinnerModelos.getSelectedItemPosition();
+        String idModelo = "";
+
+        if (modeloSeleccionado >= 0 && modeloSeleccionado < listaModelos.size()) {
+            idModelo = String.valueOf(listaModelos.get(modeloSeleccionado).getId()); // 👈 Aquí tienes el ID real
+        }
+
         HashMap<String, String> body = new HashMap<>();
         body.put("placa", etPlaca.getText().toString());
         body.put("color", etColor.getText().toString());
-        body.put("modelo", "1"); //TODO:colocar el spinner del modelo con su ID
+        body.put("modelo", idModelo); // ✅ ahora se envía el ID correcto
         body.put("year", etAnio.getText().toString());
-        Call<Void> call = apiService.agregarVehiculo(token,body);
+
+        Call<Void> call = apiService.agregarVehiculo(token, body);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -119,10 +207,8 @@ public class RegistroVehiculo extends AppCompatActivity {
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-
                         JSONObject jsonObject = new JSONObject(errorBody);
                         String mensaje = jsonObject.getString("mensaje");
-
                         Log.e("Retrofit", "Mensaje recibido: " + mensaje);
                     } catch (Exception e) {
                         Log.e("Retrofit", "Error al parsear errorBody: " + e.getMessage());
@@ -136,6 +222,7 @@ public class RegistroVehiculo extends AppCompatActivity {
             }
         });
     }
+
     private boolean validateRegistration(String placa, String color, String anio) {
         if(placa.isEmpty()){
             etPlaca.setError("Placa inválida");
@@ -176,6 +263,8 @@ public class RegistroVehiculo extends AppCompatActivity {
     }
 
     private void cargarSpinnerModelos(List<VehiculoModel.Modelo> modelos) {
+        listaModelos = modelos; // 👈 Guardamos la lista globalmente
+
         List<String> nombresModelos = new ArrayList<>();
         for (VehiculoModel.Modelo modelo : modelos) {
             nombresModelos.add(modelo.getNombre());
@@ -185,6 +274,5 @@ public class RegistroVehiculo extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerModelos.setAdapter(adapter);
     }
-
 
 }

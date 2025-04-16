@@ -1,5 +1,6 @@
 package com.example.carwashcliente_android.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -68,11 +69,9 @@ public class SeleccionVehiculoFragment extends Fragment {
         cargarVehiculos();
 
         agregar.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.contenedorFragments, new SeleccionServiciosFragment())
-                    .addToBackStack(null)
-                    .commit();
+            Intent intent = new Intent(getContext(), RegistroVehiculo.class);
+            intent.putExtra("accion", 1);
+            startActivity(intent);
         });
 
         return view;
