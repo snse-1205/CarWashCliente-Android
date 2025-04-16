@@ -1,5 +1,6 @@
 package com.example.carwashcliente_android.Retrofit;
 
+import com.example.carwashcliente_android.Models.ServiciosModel;
 import android.util.Log;
 
 import com.example.carwashcliente_android.Models.Cotizacion;
@@ -68,8 +69,12 @@ public interface ApiService {
 
     @POST("carros")
     Call<Void> agregarVehiculo(@Header("Authorization") String token, HashMap<String,String> body);
+
     @GET("carros/mym")
     Call<List<VehiculoModel.Marca>> listarMarcaModelo();
+
+    @GET("servicios/")
+    Call<List<ServiciosModel>> listarServicios(@Header("Authorization") String token);
 
     @PUT("carros/{id}")
     Call<VehiculoModel> actualizarCarro(@Header("Authorization") String token,

@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="16dp">
 
-    <TextView android:text="Selecciona los servicios que deseas cotizar" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Selecciona los servicios que deseas cotizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVerServicio"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
     <Button
         android:id="@+id/btnIrADetalleServicio"
         android:text="Mostrar Cotización"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
 
-    <ListView android:id="@+id/listaServicios" android:layout_width="match_parent" android:layout_height="wrap_content"/>
 </LinearLayout>

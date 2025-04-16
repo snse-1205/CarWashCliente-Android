@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.carwashcliente_android.Models.Cotizacion;
 import com.example.carwashcliente_android.Activities.RegistroVehiculo;
 import com.example.carwashcliente_android.Adapters.VehiculoAdapter;
 import com.example.carwashcliente_android.Adapters.VehiculoCotizacionAdapter;
@@ -46,22 +47,25 @@ public class SeleccionVehiculoFragment extends Fragment {
         // Required empty public constructor
     }
 
+    Cotizacion cotizacion;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_seleccion_vehiculo, container, false);
+
+        if (getArguments() != null) {
+            cotizacion = (Cotizacion) getArguments().getSerializable("cotizacion");
+            if (cotizacion != null) {
+
+                Log.d("Cotizacion modalidad",cotizacion.getModalidad()+"");
+            }
+        }
 
         Button agregar = view.findViewById(R.id.btnAgregarVehiculo);
 
         clientManager = new ClientManager(getContext());
 
-        // Configurar RecyclerView
         recyclerView = view.findViewById(R.id.recyclerVehiculosCotizacion);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Inicializa la lista y el adapter vacío
-        vehiculosList = new ArrayList<>();
-        adapter = new VehiculoCotizacionAdapter(vehiculosList, this);
-        recyclerView.setAdapter(adapter);
 
         cargarVehiculos();
 
@@ -82,10 +86,25 @@ public class SeleccionVehiculoFragment extends Fragment {
             @Override
             public void onResponse(Call<List<VehiculoModel>> call, Response<List<VehiculoModel>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
                     vehiculosList.clear();
                     vehiculosList.addAll(response.body());
 
-                    adapter = new VehiculoCotizacionAdapter(vehiculosList, SeleccionVehiculoFragment.this);
+                    adapter = new VehiculoCotizacionAdapter(vehiculosList, vehiculo -> {
+                        cotizacion.setIdCarro(vehiculo.getId());
+
+                        Fragment next = new SeleccionServiciosFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("cotizacion", cotizacion);
+                        next.setArguments(bundle);
+
+                        requireActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.contenedorFragments, next)
+                                .addToBackStack(null)
+                                .commit();
+                    });
+
                     recyclerView.setAdapter(adapter);
                     Log.d("Retrofit", "Vehiculos mostrados");
                 } else {
