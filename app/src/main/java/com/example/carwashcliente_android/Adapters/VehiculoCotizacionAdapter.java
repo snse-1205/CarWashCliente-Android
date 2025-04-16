@@ -1,6 +1,8 @@
 package com.example.carwashcliente_android.Adapters;
 
+import androidx.fragment.app.Fragment;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,27 +11,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.carwashcliente_android.Fragments.SeleccionServiciosFragment;
 import com.example.carwashcliente_android.Models.VehiculoModel;
 import com.example.carwashcliente_android.R;
 
 import java.util.List;
 
-public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHolder> {
+public class VehiculoCotizacionAdapter extends RecyclerView.Adapter<VehiculoCotizacionAdapter.ViewHolder> {
 
     private List<VehiculoModel> vehiculos;
-    private Context context;
+    private Fragment fragment;
 
-    public VehiculoAdapter(List<VehiculoModel> vehiculos, Context context) {
+    public VehiculoCotizacionAdapter(List<VehiculoModel> vehiculos, Fragment fragment) {
         this.vehiculos = vehiculos;
-        this.context = context;
+        this.fragment = fragment;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_vehiculo, parent, false);
-        return new ViewHolder(view);
+                .inflate(R.layout.item_vehiculo_cotizacion, parent, false);
+        return new VehiculoCotizacionAdapter.ViewHolder(view);
     }
 
     @Override
@@ -39,6 +42,18 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHo
         holder.tvModelo.setText(vehiculo.getModelo());
         holder.tvPlaca.setText(vehiculo.getPlaca());
         holder.tvAnio.setText(vehiculo.getAnio());
+
+        holder.itemView.setOnClickListener(v -> {
+            SeleccionServiciosFragment fragmentDestino = SeleccionServiciosFragment.newInstance(
+                    vehiculo.getId()
+            );
+            Log.d("ID por adapter: ", "Vehiculo id: "+vehiculo.getId());
+            fragment.requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contenedorFragments, fragmentDestino)
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
     @Override
@@ -47,7 +62,7 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvMarca, tvModelo, tvPlaca, tvAnio;
+        public TextView tvMarca,tvModelo, tvPlaca, tvAnio;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -2,6 +2,7 @@ package com.example.carwashcliente_android.Retrofit;
 
 import com.example.carwashcliente_android.Models.UbicacionModel;
 import com.example.carwashcliente_android.Models.UsuarioModel;
+import com.example.carwashcliente_android.Models.VehiculoModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,5 +55,14 @@ public interface ApiService {
     Call<List<UbicacionModel>> listaUbicaciones(
             @Header("Authorization") String token
     );
+
+    @GET("carros/idcliente")
+    Call<List<VehiculoModel>> listaVehiculo(@Header("Authorization") String token);
+
+    @POST("carros")
+    Call<Void> agregarVehiculo(@Header("Authorization") String token, HashMap<String,String> body);
+
+    @GET("carros/mym")
+    Call<List<VehiculoModel.Marca>> listarMarcaModelo();
 
 }
