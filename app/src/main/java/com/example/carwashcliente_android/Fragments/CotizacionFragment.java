@@ -30,8 +30,6 @@ public class CotizacionFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_cotizacion, container, false);
         return view;
     }
 }
