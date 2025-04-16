@@ -67,6 +67,7 @@ public class SeleccionVehiculoFragment extends Fragment {
 
         agregar.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), RegistroVehiculo.class);
+            intent.putExtra("accion", 1);
             startActivity(intent);
         });
 
