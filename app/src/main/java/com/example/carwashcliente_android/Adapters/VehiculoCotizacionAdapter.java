@@ -23,7 +23,6 @@ import java.util.List;
 public class VehiculoCotizacionAdapter extends RecyclerView.Adapter<VehiculoCotizacionAdapter.ViewHolder> {
     private VehiculoClickListener listener;
     private List<VehiculoModel> vehiculos;
-    Cotizacion cotizacion;
 
     public VehiculoCotizacionAdapter(List<VehiculoModel> vehiculos, VehiculoClickListener listener) {
         this.vehiculos = vehiculos;

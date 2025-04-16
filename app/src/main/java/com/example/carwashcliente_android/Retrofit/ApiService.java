@@ -1,5 +1,6 @@
 package com.example.carwashcliente_android.Retrofit;
 
+import com.example.carwashcliente_android.Models.ServiciosModel;
 import com.example.carwashcliente_android.Models.UbicacionModel;
 import com.example.carwashcliente_android.Models.UsuarioModel;
 import com.example.carwashcliente_android.Models.VehiculoModel;
@@ -65,4 +66,6 @@ public interface ApiService {
     @GET("carros/mym")
     Call<List<VehiculoModel.Marca>> listarMarcaModelo();
 
+    @GET("servicios/")
+    Call<List<ServiciosModel>> listarServicios(@Header("Authorization") String token);
 }

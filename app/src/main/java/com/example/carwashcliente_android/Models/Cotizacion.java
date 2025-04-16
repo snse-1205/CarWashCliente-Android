@@ -1,6 +1,7 @@
 package com.example.carwashcliente_android.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cotizacion implements Serializable {
@@ -10,13 +11,25 @@ public class Cotizacion implements Serializable {
     private double precio;
     private String fechaCita;
     private String estado;
-    private List<Cotizacion.detalles>detalles;
+    private int ubicacion;
+    private List<Cotizacion.detalles>detalles = new ArrayList<>();
 
     public Cotizacion() {
     }
 
 
-    public Cotizacion(String servicio, int modalidad, double precio, String fechaCita, String estado) {
+    public Cotizacion(int idCarro, String servicio, int modalidad, double precio, String fechaCita, String estado, int ubicacion) {
+        this.idCarro = idCarro;
+        this.servicio = servicio;
+        this.modalidad = modalidad;
+        this.precio = precio;
+        this.fechaCita = fechaCita;
+        this.estado = estado;
+        this.ubicacion = ubicacion;
+    }
+
+    public Cotizacion(int idCarro, String servicio, int modalidad, double precio, String fechaCita, String estado) {
+        this.idCarro = idCarro;
         this.servicio = servicio;
         this.modalidad = modalidad;
         this.precio = precio;
@@ -90,6 +103,14 @@ public class Cotizacion implements Serializable {
         this.idCarro = idCarro;
     }
 
+    public int getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(int ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
     public void addDetalles(Cotizacion.detalles detalles) {
         this.detalles.add(detalles);
     }
@@ -129,4 +150,27 @@ public class Cotizacion implements Serializable {
             this.precio = precio;
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cotizacion {\n");
+        sb.append("  idCarro: ").append(idCarro).append("\n");
+        sb.append("  servicio: ").append(servicio).append("\n");
+        sb.append("  modalidad: ").append(modalidad).append("\n");
+        sb.append("  precio: ").append(precio).append("\n");
+        sb.append("  fechaCita: ").append(fechaCita).append("\n");
+        sb.append("  estado: ").append(estado).append("\n");
+
+        sb.append("  detalles:\n");
+        for (detalles d : detalles) {
+            sb.append("    - idServicio: ").append(d.getIdServicio()).append("\n");
+            sb.append("      notaCliente: ").append(d.getNotaCliente()).append("\n");
+            sb.append("      precio: ").append(d.getPrecio()).append("\n");
+        }
+
+        sb.append("}");
+        return sb.toString();
+    }
+
 }

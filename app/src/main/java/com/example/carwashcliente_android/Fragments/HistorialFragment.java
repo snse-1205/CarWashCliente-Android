@@ -42,9 +42,9 @@ public class HistorialFragment extends Fragment {
         // Inicializar lista de cotizaciones (esto debería venir de tu backend)
         cotizacionesList = new ArrayList<>();
         // Agregar datos de ejemplo
-        cotizacionesList.add(new Cotizacion("Lavado Premium",1, 150.000, "15/06/2023", "Aceptada"));
-        cotizacionesList.add(new Cotizacion("Lavado Básico",1, 80.000, "10/06/2023", "Rechazada"));
-        cotizacionesList.add(new Cotizacion("Lavado Completo",1, 120.000, "05/06/2023", "Aceptada"));
+        cotizacionesList.add(new Cotizacion(1,"Lavado Premium",1, 150.000, "15/06/2023", "Aceptada"));
+        cotizacionesList.add(new Cotizacion(1,"Lavado Básico",1, 80.000, "10/06/2023", "Rechazada"));
+        cotizacionesList.add(new Cotizacion(1,"Lavado Completo",1, 120.000, "05/06/2023", "Aceptada"));
 
 
         adapter = new HistorialAdapter(cotizacionesList, getContext());
