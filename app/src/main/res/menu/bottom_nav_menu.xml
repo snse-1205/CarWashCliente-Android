@@ -9,10 +9,6 @@
         android:icon="@drawable/ic_cotizacion"
         android:title="Cotización"/>
     <item
-        android:id="@+id/nav_historial"
-        android:icon="@drawable/ic_historial"
-        android:title="Historial"/>
-    <item
         android:id="@+id/nav_vehiculo"
         android:icon="@drawable/ic_vehiculo"
         android:title="Vehículos"/>

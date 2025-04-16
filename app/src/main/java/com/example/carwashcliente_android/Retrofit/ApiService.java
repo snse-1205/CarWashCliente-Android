@@ -1,5 +1,6 @@
 package com.example.carwashcliente_android.Retrofit;
 
+import com.example.carwashcliente_android.Models.CotizacionesPendientesModel;
 import com.example.carwashcliente_android.Models.ServiciosModel;
 import android.util.Log;
 
@@ -107,12 +108,16 @@ public interface ApiService {
                                            @Path("id") int id);
 
     @GET("cotizaciones/pendientes")
-    Call<List<Cotizacion>> aceptarORechazarCotizacion(@Header("Authorization") String token);
+    Call<List<CotizacionesPendientesModel>> aceptarORechazarCotizacion(@Header("Authorization") String token);
 
     @PUT("cotizaciones/pendientes/{id}")
-    Call<List<Cotizacion>> accionEnCotizacion(@Header("Authorization") String token,
+    Call<CotizacionesPendientesModel> accionEnCotizacion(@Header("Authorization") String token,
                                               @Body HashMap<String,String> body,
                                               @Path("id") int id);
+
+    @GET("cotizaciones/serviciospendientes/{id}")
+    Call<List<Cotizacion>> serviciosCotizacionesPendintes(@Header("Authorization") String token,
+                                                          @Path("id") int id);
 
     @GET("cotizaciones/historial")
     Call<List<Cotizacion>> cotizacionesPasadas(@Header("Authorization") String token);

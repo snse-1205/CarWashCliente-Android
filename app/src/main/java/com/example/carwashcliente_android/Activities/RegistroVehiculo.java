@@ -204,7 +204,7 @@ public class RegistroVehiculo extends AppCompatActivity {
         HashMap<String, String> body = new HashMap<>();
         body.put("placa", etPlaca.getText().toString());
         body.put("color", etColor.getText().toString());
-        body.put("modelo", idModelo); // ✅ ahora se envía el ID correcto
+        body.put("modelo", idModelo);
         body.put("year", etAnio.getText().toString());
 
         Call<Void> call = apiService.agregarVehiculo(token, body);

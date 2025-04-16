@@ -49,8 +49,6 @@ public class PantallaPrincipal extends AppCompatActivity {
                 abrirFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.nav_cotizacion) {
                 abrirFragment(new SeleccionLugarFragment());
-            } else if (item.getItemId() == R.id.nav_historial) {
-                abrirFragment(new HistorialFragment());
             } else if (item.getItemId() == R.id.nav_vehiculo) {
                 abrirFragment(new VehiculoFragment());
             }

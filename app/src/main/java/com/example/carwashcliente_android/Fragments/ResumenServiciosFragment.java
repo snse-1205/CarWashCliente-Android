@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.carwashcliente_android.Adapters.ResumenServiciosAdapter;
 import com.example.carwashcliente_android.Config.ClientManager;
@@ -20,6 +21,8 @@ import com.example.carwashcliente_android.Models.Cotizacion;
 import com.example.carwashcliente_android.R;
 import com.example.carwashcliente_android.Retrofit.ApiService;
 import com.example.carwashcliente_android.Retrofit.RetrofitClient;
+
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,17 +84,27 @@ public class ResumenServiciosFragment extends Fragment {
                 if(response.isSuccessful()){
                     requireActivity().getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.contenedorFragments, new FragmenHome())
+                            .replace(R.id.contenedorFragments, new HomeFragment())
                             .addToBackStack(null)
                             .commit();
                 }else{
+                    try {
+                        String errorBody = response.errorBody().string();
 
+                        JSONObject jsonObject = new JSONObject(errorBody);
+                        String mensaje = jsonObject.getString("mensaje");
+
+                        Toast.makeText(getContext(), "⚠️ " + mensaje, Toast.LENGTH_LONG).show();
+                        Log.e("Retrofit", "Mensaje recibido: " + mensaje);
+                    } catch (Exception e) {
+                        Log.e("Retrofit", "Error al parsear errorBody: " + e.getMessage());
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                Log.e("Retrofit", "Fallo en la solicitud: " + t.getMessage());
             }
         });
     }
