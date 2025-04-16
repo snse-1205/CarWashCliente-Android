@@ -26,12 +26,13 @@
             android:gravity="center" />
 
         <ImageView
+            android:id="@+id/LogoutPantallaPrincipal"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_launcher_foreground"
+            android:src="@drawable/icon_exit"
             android:contentDescription="Logo"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
     <FrameLayout
