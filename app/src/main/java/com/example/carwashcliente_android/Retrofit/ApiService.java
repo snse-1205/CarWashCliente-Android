@@ -1,5 +1,6 @@
 package com.example.carwashcliente_android.Retrofit;
 
+import com.example.carwashcliente_android.Models.UbicacionModel;
 import com.example.carwashcliente_android.Models.UsuarioModel;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public interface ApiService {
     );
 
     @GET("cliente/ubicacion/")
-    Call<Void> listaUbicaciones(
+    Call<List<UbicacionModel>> listaUbicaciones(
             @Header("Authorization") String token
     );
 

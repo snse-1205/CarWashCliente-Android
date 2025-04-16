@@ -57,4 +57,15 @@ public class UbicacionModel {
     public void setLongi(double longi) {
         this.longi = longi;
     }
+
+    @Override
+    public String toString() {
+        return "UbicacionModel{" +
+                "id=" + id +
+                ", lat=" + lat +
+                ", longi=" + longi +
+                ", referencia='" + referencia + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

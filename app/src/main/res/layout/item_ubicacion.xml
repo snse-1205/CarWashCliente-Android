@@ -23,7 +23,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
-                android:src="@android:drawable/land_layer_location" />
+                android:src="@drawable/land_layer_location" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvMarcaModelo"
+                    android:id="@+id/tvNombreUbicacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nombre Ubicacion"
@@ -46,7 +46,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tvPlaca"
+                        android:id="@+id/tvReferencia"
                         android:text="Referencia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
