@@ -106,7 +106,7 @@ public interface ApiService {
     Call<UbicacionModel> eliminarUbicacion(@Header("Authorization") String token,
                                            @Path("id") int id);
 
-    @GET("cotizaciones/pendientes")
+    @GET("cotizaciones/pendientes") //obener obtenerCotizacionesPendientes
     Call<List<Cotizacion>> aceptarORechazarCotizacion(@Header("Authorization") String token);
 
     @PUT("cotizaciones/pendientes/{id}")

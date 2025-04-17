@@ -90,9 +90,13 @@ public class SeleccionServiciosFragment extends Fragment {
             @Override
             public void onResponse(Call<List<ServiciosModel>> call, Response<List<ServiciosModel>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
                     servicios.clear();
-                    servicios.addAll(response.body());
+
+                    for (ServiciosModel servicio : response.body()){
+                        if(servicio.getCategoria() == cotizacion.getModalidad()){
+                            servicios.add(servicio);
+                        }
+                    }
                     adapter = new SeleccionarServicioAdapter(servicios, servicio ->{
                         mostrarDialogoAgregarNota(servicio);
                     });

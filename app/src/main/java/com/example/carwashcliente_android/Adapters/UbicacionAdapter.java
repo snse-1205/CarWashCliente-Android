@@ -19,9 +19,12 @@ public class UbicacionAdapter extends RecyclerView.Adapter<UbicacionAdapter.View
     private List<UbicacionModel> ubicaciones;
     private Context context;
 
-    public UbicacionAdapter(List<UbicacionModel> ubicaciones, Context context) {
+    private onClickLugar listener;
+
+    public UbicacionAdapter(List<UbicacionModel> ubicaciones, Context context,onClickLugar listener) {
         this.ubicaciones = ubicaciones;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +40,10 @@ public class UbicacionAdapter extends RecyclerView.Adapter<UbicacionAdapter.View
         UbicacionModel ubicacion = ubicaciones.get(position);
         holder.tvNombre.setText(ubicacion.getNombre());
         holder.tvReferencia.setText(ubicacion.getReferencia());
+
+        holder.itemView.setOnClickListener(v -> {
+            listener.elegirLugar(ubicacion);
+        });
     }
 
     @Override
@@ -52,6 +59,10 @@ public class UbicacionAdapter extends RecyclerView.Adapter<UbicacionAdapter.View
             tvNombre = itemView.findViewById(R.id.tvNombreUbicacion);
             tvReferencia = itemView.findViewById(R.id.tvReferencia);
         }
+    }
+
+    public interface onClickLugar{
+        void elegirLugar(UbicacionModel ubicaciones);
     }
 
 }

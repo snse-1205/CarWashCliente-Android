@@ -4,14 +4,16 @@ public class ServiciosModel {
     private int ID;
     private String Servicio;
     private double Precio;
+    private int categoria;
 
     public ServiciosModel() {
     }
 
-    public ServiciosModel(int ID, String servicio, double precio) {
+    public ServiciosModel(int ID, String servicio, double precio, int categoria) {
         this.ID = ID;
         Servicio = servicio;
         Precio = precio;
+        this.categoria = categoria;
     }
 
     public int getID() {
@@ -32,6 +34,14 @@ public class ServiciosModel {
 
     public double getPrecio() {
         return Precio;
+    }
+
+    public int getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(int categoria) {
+        this.categoria = categoria;
     }
 
     public void setPrecio(double precio) {
