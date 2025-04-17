@@ -7,14 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.PantallaPrincipal">
+    tools:context=".Activities.PantallaPrincipal"
+    android:background="?android:attr/windowBackground">
 
     <LinearLayout
         android:id="@+id/linearLayoutTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="?attr/colorPrimary">
 
         <TextView
             android:layout_width="0dp"
@@ -23,22 +25,25 @@
             android:text="Carwash el Catracho"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_launcher_foreground"
+            android:id="@+id/LogoutPantallaPrincipal"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_exit"
             android:contentDescription="Logo"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            app:tint="?android:attr/textColorPrimary" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/contenedorFragments"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -49,6 +54,4 @@
         app:itemTextAppearanceActive="@style/TextAppearance.MaterialComponents.Caption"
         app:itemTextAppearanceInactive="@style/TextAppearance.MaterialComponents.Caption"
         app:menu="@menu/bottom_navigation_menu_items" />
-
-
 </androidx.appcompat.widget.LinearLayoutCompat>

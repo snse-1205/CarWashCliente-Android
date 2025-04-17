@@ -8,12 +8,75 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                android:layout_marginEnd="16dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnGaleria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Galería"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="?attr/colorOnBackground"/>
+
+                <Button
+                    android:id="@+id/btnTomarFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tomar Foto"
+                    android:textColor="?attr/colorOnBackground"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:inputType="textPersonName"
+            android:textColor="?android:attr/textColorPrimary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/btnEmailVerificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Verificar"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/etPhone"
@@ -21,7 +84,7 @@
             android:layout_height="wrap_content"
             android:hint="Teléfono (sin código de país)"
             android:inputType="phone"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -29,7 +92,7 @@
             android:layout_height="wrap_content"
             android:hint="Contraseña"
             android:inputType="textPassword"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp" />
 
         <EditText
             android:id="@+id/etConfirmPassword"
@@ -37,14 +100,43 @@
             android:layout_height="wrap_content"
             android:hint="Confirmar Contraseña"
             android:inputType="textPassword"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp" />
 
-        <Button
-            android:id="@+id/btnRegister"
+         <LinearLayout
+            android:id="@+id/layoutVerification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginTop="24dp"
-            android:backgroundTint="#8E24AA"
-            android:text="Registrarse" />
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:text="Ingresa el código enviado" />
+
+            <EditText
+                android:id="@+id/etCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Código de 6 dígitos"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textSize="24sp"
+                android:gravity="center" />
+
+             <Button
+                 android:id="@+id/btnRegister"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="24dp"
+                 android:backgroundTint="#8E24AA"
+                 android:text="Registrarse" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

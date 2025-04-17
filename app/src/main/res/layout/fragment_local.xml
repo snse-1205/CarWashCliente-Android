@@ -6,11 +6,18 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/textTituloLocal"
         android:text="Local - Mapa de ubicación"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <!-- Aquí iría Google Map si se desea -->
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btnCancelarLocal"

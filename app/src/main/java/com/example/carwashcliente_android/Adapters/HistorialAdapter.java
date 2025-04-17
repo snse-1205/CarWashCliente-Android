@@ -36,8 +36,8 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cotizacion cotizacion = cotizaciones.get(position);
         holder.tvServicio.setText(cotizacion.getServicio());
-        holder.tvPrecio.setText(cotizacion.getPrecio());
-        holder.tvFecha.setText(cotizacion.getFecha());
+        holder.tvPrecio.setText(String.valueOf(cotizacion.getTotal()));
+        holder.tvFecha.setText(cotizacion.getFechaCita());
         holder.tvEstado.setText(cotizacion.getEstado());
     }
 

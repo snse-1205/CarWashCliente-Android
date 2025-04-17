@@ -11,11 +11,6 @@
     android:title="Home" />
 
     <item
-        android:id="@+id/nav_historial"
-        android:icon="@android:drawable/checkbox_off_background"
-    android:title="Historial" />
-
-    <item
         android:id="@+id/nav_vehiculo"
         android:icon="@android:drawable/ic_dialog_info"
     android:title="Vehículo" />
